@@ -1,0 +1,4 @@
+services:
+  lbhf_subsites.service:
+    class: Drupal\lbhf_subsites\Service\SubsiteService
+    arguments: ['@entity_type.manager', '@menu.active_trail', '@plugin.manager.menu.link']

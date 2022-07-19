@@ -1,0 +1,5 @@
+name: "LBHF Subsites"
+description: "Allows creation of subsites"
+package: "LBHF"
+type: module
+core_version_requirement: ^8.8 || ^9

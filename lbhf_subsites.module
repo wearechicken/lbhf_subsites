@@ -1,0 +1,52 @@
+<?php
+
+/**
+ * @file
+ * Contains lbhf_subsites.module.
+ */
+
+declare(strict_types=1);
+
+/**
+ * Implements hook_preprocess_node().
+ *
+ * When a node is a child menu item of a subsite homepage node, this finds the
+ * subsite homepage and inserts some of its properties into the template.
+ */
+function lbhf_subsites_preprocess_html(&$variables) {
+
+  /** @var \Drupal\lbhf_subsites\Service\SubsiteService $subSiteService */
+  $subSiteService = \Drupal::service('lbhf_subsites.service');
+
+  // If the current node is part of a subsite, $subsiteHomePage will be the
+  // subsite's homepage node. If it's not, it'll be null.
+  $subsiteHomePage = $subSiteService->getHomePage();
+  if ($subsiteHomePage) {
+    $colour = $subsiteHomePage->get('field_lbhf_subsite_colour')->value;
+    $variables['attributes']['class'][] = 'subsite';
+    $variables['attributes']['class'][] = 'color--' . $colour;
+  }
+}
+
+/**
+ * Implements hook_preprocess_page().
+ *
+ * When a node is a child menu item of a subsite homepage node, this finds the
+ * subsite homepage and inserts some of its properties into the template.
+ */
+function lbhf_subsites_preprocess_menu(&$variables) {
+
+  if ($variables['menu_name'] !== 'main') {
+    return;
+  }
+
+  /** @var \Drupal\lbhf_subsites\Service\SubsiteService $subSiteService */
+  $subSiteService = \Drupal::service('lbhf_subsites.service');
+
+  // If the current node is part of a subsite, $subsiteHomePage will be the
+  // subsite's homepage node. If it's not, it'll be null.
+  $subsiteHomePage = $subSiteService->getHomePage();
+  if ($subsiteHomePage) {
+    $variables['subsite_homepage_link'] = $subsiteHomePage->toLink();
+  }
+}

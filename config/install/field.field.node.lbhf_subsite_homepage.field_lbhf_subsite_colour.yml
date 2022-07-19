@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_lbhf_subsite_colour
+    - node.type.lbhf_subsite_homepage
+  module:
+    - options
+id: node.lbhf_subsite_homepage.field_lbhf_subsite_colour
+field_name: field_lbhf_subsite_colour
+entity_type: node
+bundle: lbhf_subsite_homepage
+label: 'Subsite colour'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: grey
+default_value_callback: ''
+settings: {  }
+field_type: list_string
